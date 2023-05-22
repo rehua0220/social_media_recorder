@@ -7,6 +7,17 @@ import 'package:record/record.dart';
 import 'package:social_media_recorder/audio_encoder_type.dart';
 import 'package:uuid/uuid.dart';
 
+class SocialMediaFilePath {
+  SocialMediaFilePath._();
+
+  static init() async {
+    final Directory appDocumentsDir = await getApplicationDocumentsDirectory();
+    documentPath = "${appDocumentsDir.path}/";
+  }
+
+  static String documentPath = '';
+}
+
 class SoundRecordNotifier extends ChangeNotifier {
   GlobalKey key = GlobalKey();
 
@@ -115,24 +126,24 @@ class SoundRecordNotifier extends ChangeNotifier {
 
   /// used to get the current store path
   Future<String> getFilePath() async {
-    String _sdPath = "";
-    if (Platform.isIOS) {
-      Directory tempDir = await getTemporaryDirectory();
-      _sdPath = initialStorePathRecord.isEmpty
-          ? tempDir.path
-          : initialStorePathRecord;
-    } else {
-      _sdPath = initialStorePathRecord.isEmpty
-          ? "/storage/emulated/0/new_record_sound"
-          : initialStorePathRecord;
-    }
-    var d = Directory(_sdPath);
-    if (!d.existsSync()) {
-      d.createSync(recursive: true);
-    }
+    String _sdPath = "${SocialMediaFilePath.documentPath}audio_${DateTime.now().millisecondsSinceEpoch}";
+    // if (Platform.isIOS) {
+    //   Directory tempDir = await getTemporaryDirectory();
+    //   _sdPath = initialStorePathRecord.isEmpty
+    //       ? tempDir.path
+    //       : initialStorePathRecord;
+    // } else {
+    //   _sdPath = initialStorePathRecord.isEmpty
+    //       ? "/storage/emulated/0/new_record_sound"
+    //       : initialStorePathRecord;
+    // }
+    // var d = Directory(_sdPath);
+    // if (!d.existsSync()) {
+    //   d.createSync(recursive: true);
+    // }
     var uuid = const Uuid();
     String uid = uuid.v1();
-    String storagePath = _sdPath + "/" + uid + _getSoundExtention();
+    String storagePath = _sdPath + "_" + uid + _getSoundExtention();
     mPath = storagePath;
     return storagePath;
   }

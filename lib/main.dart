@@ -2,8 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:social_media_recorder/audio_encoder_type.dart';
 import 'package:social_media_recorder/screen/social_media_recorder.dart';
 
+import 'provider/sound_record_notifier.dart';
+
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
+  SocialMediaFilePath.init();
+
   runApp(const MyApp());
 }
 
