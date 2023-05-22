@@ -33,22 +33,15 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Center(
-        child: Stack(
-          children: [
-            Padding(
-              padding: const EdgeInsets.only(top: 140, left: 4, right: 4),
-              child: Align(
-                alignment: Alignment.centerRight,
-                child: SocialMediaRecorder(
-                  sendRequestFunction: (soundFile) {
-                    // print("the current path is ${soundFile.path}");
-                  },
-                  encode: AudioEncoderType.AAC,
-                ),
-              ),
-            ),
-          ],
+      body: Container(
+        height: 60,
+        alignment: Alignment.centerRight,
+        margin: const EdgeInsets.symmetric(vertical: 150),
+        child: SocialMediaRecorder(
+          sendRequestFunction: (soundFile) {
+            // print("the current path is ${soundFile.path}");
+          },
+          encode: AudioEncoderType.AAC,
         ),
       ),
     );

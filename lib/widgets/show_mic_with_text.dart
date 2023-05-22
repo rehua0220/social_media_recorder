@@ -39,9 +39,10 @@ class ShowMicWithText extends StatelessWidget {
     return Row(
       mainAxisAlignment: !soundRecorderState.buttonPressed
           ? MainAxisAlignment.center
-          : MainAxisAlignment.start,
+          : MainAxisAlignment.center,
       children: [
         Row(
+          crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             Transform.scale(
               key: soundRecorderState.key,
